@@ -22,4 +22,5 @@ a = fig.add_subplot(1, 3, 3)
 imgplot = plt.imshow(red, cmap='Reds')
 a.set_title('Red')
 
+plt.tight_layout()
 plt.show()
