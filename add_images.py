@@ -6,29 +6,31 @@ path = '/Users/RohanSaxena/Documents/projects/cv'
 image1 = cv2.imread(path + '/car1.png')
 image2 = cv2.imread(path + '/car2.png')
 
-np_add = image1 + image2
-cv_add = cv2.add(image1, image2)
+'''
+Adding 2 images with the brightest pixels will result in a pixel having twice
+the maximum brightness. To resolve this, average the 2 images.
+'''
+
+addition = cv2.add(image1, image2)
+normalised = cv2.addWeighted(image1, 0.5, image2, 0.5, 0)
 
 fig = plt.figure()
 
 a = fig.add_subplot(2, 2, 1)
-a.set_title('Image 1')
 plt.imshow(image1)
+a.set_title('Image 1')
 
 a = fig.add_subplot(2, 2, 2)
-a.set_title('Image 2')
 plt.imshow(image2)
+a.set_title('Image 2')
 
-# NumPy does a modulo addition: 190 + 190 (> 255) = 380 % 255 = 125
 a = fig.add_subplot(2, 2, 3)
-a.set_title('NumPy')
-plt.imshow(np_add)
+plt.imshow(addition)
+a.set_title('Un-normalised')
 
-''' ALWAYS USE OPENCV FOR ADDING IMAGES! '''
-# OpenCV saturates the addition: 190 + 190 (> 255) = 255
 a = fig.add_subplot(2, 2, 4)
-a.set_title('OpenCV')
-plt.imshow(cv_add)
+plt.imshow(normalised)
+a.set_title('Normalised')
 
 plt.tight_layout()
 plt.show()
